@@ -20,7 +20,9 @@ function idsOf(objectType: string, criteria?: object): array {
     {
         ids = add_entries(ids, [meta(obj).objectId]);
     }
-    return sort(ids);
+    // 17a7e2d: sort(compareFunction, array); no empty untyped arrays
+    return length(ids) < 2 ? ids :
+        sort(function (a: string, b: string): boolean { return a < b; }, ids);
 }
 
 /*
